@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <title>Pokey Manager</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+</head>
+
+
+<body onload="setTimeout('updateStatus(3);',1000);">
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="static/js/materialize.min.js"></script>
+
+
+    <nav>
+        <div class="nav-wrapper  indigo lighten-2" style=" z-index:99;">
+            <a href="#" class="brand-logo center">PokeyPy Manager</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a href="/">Dashboard</a></li>
+
+                <li><a href="/inventory">PokeManager</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="aboveInventory" id="aboveInventory">
+        <br>
+        <Center>
+            <form action="/release" id="topForm">
+                <font face=arial size=3>Sort By:&nbsp;</font>
+                <select form="topForm" id="sortBy" name="sortBy" onchange="sortPokes()" style="text-align:center;width:150px;"> 
+			<option value="cp">Pokemon CP</option>
+			<option value="pokemon_name">Pokemon Name</option>
+			<option value="pokemon_id">Pokemon ID</option>
+			<option value="iv">Pokemon IV</option>
+			<option value="creation_time_ms">Recent</option>
+			<option value="favorite">Favorites</option>
+			
+			</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="button" id="advFilter" onclick="document.getElementById('advFilterModal').style.display = 'block'" value="Advanced Filter">
+                <input type="button" id="selectAll" onclick="selectAllPokes()" value="Select All">
+                <a href="inventory?refresh=true"><button id="refresh" type="button" >Refresh Data</button></a>
+                <span id="numSelected" style="padding-left:30px;"></span>
+                <br>
+                <input type="hidden" id="pokeID" name="pokeID">
+                <input type=submit style="background-color:  #ff5c33;" value="Favorite Selected" name="action">&nbsp;
+                <input type=submit style="background-color:  #ff5c33;" value="Transfer Selected" name="action">&nbsp;
+                <input type=submit style="background-color:  #ff5c33;" value="Evolve Selected" name="action">&nbsp;
+                <input type=submit style="background-color:  #ff5c33;" value="Rename Selected" name="action"> &nbsp;
+                <input type=submit style="background-color:  #ff5c33;" value="PowerUp Selected" name="action">&nbsp;
+
+            </form>
+
+
+        </center>
+        <br>
+    </div>
+
+    <div class="inventory" id="inventory">
+        <br><br><br><br><br><br>
+    </div>
+    <div id="status" class="status">
+        <b><font size=5>Status Log</font></b>
+        <textarea id="statusText" style="width:100%;height:200px;"></textarea>
+    </div>
+    <div id="advFilterModal" class="modal">
+        <center><br>
+            <font size=5 face=arial>Advanced Filter</font>
+        </center><br>
+
+
+        <div style="width:80%;position:relative;left:10%;">
+            <font style="margin-left:20px;" face=arial>CP&nbsp;&nbsp;&nbsp;&nbsp; <select style="width:80px;display:inline;font-size:15px;" id="cpOper"><option> > </option> <option> >= </option> <option> < </option> <option> <= </option> <option> == </option> </select> &nbsp;&nbsp;&nbsp;&nbsp;<input value=0 style="margin-top:20px;margin-left:10px;width:70px;" id="cpThreshold"> 
+                <select style="width:100px;display:inline;font-size:15px;" id="andOr"><option value="||">OR</option><option value="&&">AND</option></select>
+                <font style="margin-left:20px;" face=arial>IV (%)&nbsp;&nbsp;&nbsp;&nbsp; <select style="width:80px;display:inline;font-size:15px;" id="ivOper"><option> > </option> <option> >= </option> <option> < </option> <option> <= </option> <option> == </option> </select> &nbsp;&nbsp;&nbsp;&nbsp;<input value=0 style="margin-top:20px;margin-left:10px;width:70px;" id="ivThreshold"> &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <font size=5>AND</font>&nbsp;&nbsp;
+                    <font style="margin-left:20px;" face=arial>Pokemon Name &nbsp; <b>==</b> <select style="padding-left:15px;width:150px;" id="pokemonName"><option>Abra</option><option>Aerodactyl</option><option>Alakazam</option><option>Arbok</option><option>Arcanine</option><option>Articuno</option><option>Beedrill</option><option>Bellsprout</option><option>Blastoise</option><option>Bulbasaur</option><option>Butterfree</option><option>Caterpie</option><option>Chansey</option><option>Charizard</option><option>Charmander</option><option>Charmeleon</option><option>Clefable</option><option>Clefairy</option><option>Cloyster</option><option>Cubone</option><option>Dewgong</option><option>Diglett</option><option>Ditto</option><option>Dodrio</option><option>Doduo</option><option>Dragonair</option><option>Dragonite</option><option>Dratini</option><option>Drowzee</option><option>Dugtrio</option><option>Eevee</option><option>Ekans</option><option>Electabuzz</option><option>Electrode</option><option>Exeggcute</option><option>Exeggutor</option><option>Farfetchd</option><option>Fearow</option><option>Flareon</option><option>Gastly</option><option>Gengar</option><option>Geodude</option><option>Gloom</option><option>Golbat</option><option>Goldeen</option><option>Golduck</option><option>Golem</option><option>Graveler</option><option>Grimer</option><option>Growlithe</option><option>Gyarados</option><option>Haunter</option><option>Hitmonchan</option><option>Hitmonlee</option><option>Horsea</option><option>Hypno</option><option>Ivysaur</option><option>Jigglypuff</option><option>Jolteon</option><option>Jynx</option><option>Kabuto</option><option>Kabutops</option><option>Kadabra</option><option>Kakuna</option><option>Kangaskhan</option><option>Kingler</option><option>Koffing</option><option>Krabby</option><option>Lapras</option><option>Lickitung</option><option>Machamp</option><option>Machoke</option><option>Machop</option><option>Magikarp</option><option>Magmar</option><option>Magnemite</option><option>Magneton</option><option>Mankey</option><option>Marowak</option><option>Meowth</option><option>Metapod</option><option>Mew</option><option>Mewtwo</option><option>Moltres</option><option>Mr-mime</option><option>Muk</option><option>Nidoking</option><option>Nidoqueen</option><option>Nidoran-f</option><option>Nidoran-m</option><option>Nidorina</option><option>Nidorino</option><option>Ninetales</option><option>Oddish</option><option>Omanyte</option><option>Omastar</option><option>Onix</option><option>Paras</option><option>Parasect</option><option>Persian</option><option>Pidgeot</option><option>Pidgeotto</option><option>Pidgey</option><option>Pikachu</option><option>Pinsir</option><option>Poliwag</option><option>Poliwhirl</option><option>Poliwrath</option><option>Ponyta</option><option>Porygon</option><option>Primeape</option><option>Psyduck</option><option>Raichu</option><option>Rapidash</option><option>Raticate</option><option>Rattata</option><option>Rhydon</option><option>Rhyhorn</option><option>Sandshrew</option><option>Sandslash</option><option>Scyther</option><option>Seadra</option><option>Seaking</option><option>Seel</option><option>Shellder</option><option>Slowbro</option><option>Slowpoke</option><option>Snorlax</option><option>Spearow</option><option>Squirtle</option><option>Starmie</option><option>Staryu</option><option>Tangela</option><option>Tauros</option><option>Tentacool</option><option>Tentacruel</option><option>Vaporeon</option><option>Venomoth</option><option>Venonat</option><option>Venusaur</option><option>Victreebel</option><option>Vileplume</option><option>Voltorb</option><option>Vulpix</option><option>Wartortle</option><option>Weedle</option><option>Weepinbell</option><option>Weezing</option><option>Wigglytuff</option><option>Zapdos</option><option>Zubat</option></select>
+                        <div style="width:60%;left:20%;position:relative;text-align:center;"><br><input style="position:absolute;left:40%;z-index:22;opacity:1;" name="ckie" type="checkbox" id="canEvolveCK">
+                            <font style="position:absolute;left:43%;padding-bottom:10px;">Show only Pokemon that I can evolve</font><br></div>
+
+                        <center><button id="filter" type="button" onclick="sortPokes()">Filter Pokemon</button> <button id="closeModal" type="button" onclick="document.getElementById('advFilterModal').style='display:none;'">Cancel</button></center>
+        </div>
+    </div>
+
+
+    <script type="text/javascript" src="static/js/mgr.js"></script>
+
+</body>
+
+</html>

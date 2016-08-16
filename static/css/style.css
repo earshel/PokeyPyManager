@@ -1,0 +1,172 @@
+input[type=text],
+        select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        
+        input[type=submit],
+        input[type=button],
+        button {
+            width: 160px;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        input[type=submit],
+        input[type=button],
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        .main {
+            position: relative;
+            width: 200px;
+            margin: 0 auto;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            top: 100px;
+        }
+        
+        .square:hover {
+            transition: box-shadow .25s;
+            box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
+        .pokeSquare {}
+        
+        .square {
+            width: 230px;
+            height: 350px;
+            padding: 10px;
+            position: relative;
+            margin: 10px;
+            float: left;
+            border: 1px solid;
+            font-family: arial;
+            align: center;
+            background-color: white;
+            box-shadow: 0 3px 50px 0 rgba(0, 0, 0, 0.08), 0 6px 10px 0 rgba(0, 0, 0, 0.09);
+            border: 1px black solid;
+            border-radius: 5px;
+        }
+    }
+    #all {
+        width: 100%;
+        float: left;
+        text-align: center;
+    }
+    .inventory {
+        left: 5%;
+        width: 1260px;
+        top: 50px;
+        height: 100%;
+        margin: 0 auto;
+        border: 1px solid;
+        background-color: rgba(72, 72, 72, .1);
+        box-shadow: 0 3px 50px 0 rgba(0, 0, 0, 0.08), 0 6px 10px 0 rgba(0, 0, 0, 0.09);
+    }
+    .aboveInventory {
+        z-index: 99;
+        left: 5%;
+        width: 90%;
+        top: 50px;
+        position: absolute;
+        height: 100px margin: 0 auto;
+    }
+    .topNav {
+        height: 100px;
+        width: 100%;
+        background-color: darkgreen;
+        position: relative;
+        top: 10px;
+        font-size: 30px;
+        font-family: arial;
+        color: white;
+        display: table;
+    }
+    .topNavCenter {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+    p.center {
+        vertical-align: middle;
+        top: 10%;
+        color: black;
+        text-align: center;
+    }
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    /* Advanced Filter */
+    .modal {
+        display: none;
+        position: absolute;
+        z-index: 1;
+        top: 40%;
+        margin: 0 auto;
+        width: 100%;
+        height: 350px;
+        overflow: auto;
+        background-color: rgb(255, 255, 255, .5);
+        background-color: rgb(255, 255, 255, .5);
+    }
+    /* Status Log*/
+    .status {
+        display: none;
+        border: 1px black solid;
+        text-align: center;
+        vertical-align: center;
+        position: absolute;
+        z-index: 12;
+        top: 40%;
+        margin: 0 auto;
+        width: 60%;
+        height: 250px;
+        overflow: auto;
+        background-color: white;
+        left: 20%;
+    }
+    progress,
+    /* All HTML5 progress enabled browsers */
+    progress[role]/* polyfill */
+    {
+        /* Turns off styling - not usually needed, but good to know. */
+        
+        appearance: none;
+        - moz - appearance: none;
+        - webkit - appearance: none;
+        /* gets rid of default border in Firefox and Opera. */
+        
+        border: none;
+        /* Needs to be in here for Safari polyfill so background images work as expected. */
+        
+        background - size: auto;
+        /* Dimensions */
+        
+        width: 400 px;
+        height: 10 px;
+    }
+    /* Polyfill */
+    progress[role]: after {
+        background - image: none;
+        /* removes default background from polyfill */
+    }
+    /* Ensure fallback text doesn't appear in polyfill */
+    progress[role] strong {
+        display: none;
+    }

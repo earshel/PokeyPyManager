@@ -1,0 +1,210 @@
+<html>
+
+<head>
+    <title>PokeyPy Manager Dashboard</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css" media="screen,projection" />
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+    <style>
+    input[type=text],
+        select {
+            width: 10%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+            width: 10%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        
+        .main {
+            display: flex;
+            justify-content: space-between;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            position: relative;
+            width: 800px;
+            height: 800px;
+            margin: 0 auto;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+            top: 100px;
+        }
+        
+        .profile {
+            padding: 5px;
+            width: 300px;
+            position: relative;
+            height: 100px;
+            background-color: rgba(255, 255, 255, .8);
+            box-shadow: 0 3px 50px 0 rgba(0, 0, 0, 0.08), 0 6px 10px 0 rgba(0, 0, 0, 0.09);
+            border: 1px white solid;
+            border-radius: 5px;
+        }
+        
+        .stats {
+            padding: 5px;
+            width: 400px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, .8);
+            box-shadow: 0 3px 50px 0 rgba(0, 0, 0, 0.08), 0 6px 10px 0 rgba(0, 0, 0, 0.09);
+            border: 1px white solid;
+            border-radius: 5px;
+        }
+        
+        .square:hover {
+            transition: box-shadow .25s;
+            box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        
+        .square {
+            width: 110px;
+            height: 150px;
+            padding: 10px;
+            position: relative;
+            margin: 10px;
+            float: left;
+            border: 1px solid;
+            font-family: arial;
+            background: radial-gradient(ellipse at center, rgba(85, 26, 139, .4) 0, rgba(255, 255, 255, .18) 54%, rgba(255, 255, 255, 0) 100%);
+            box-shadow: 0 3px 50px 0 rgba(0, 0, 0, 0.08), 0 6px 10px 0 rgba(0, 0, 0, 0.09);
+        }
+    }
+    #all {
+        width: 100%;
+        float: left;
+        text-align: center;
+    }
+    .inventory {
+        left: 5%;
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+    }
+    .topNav {
+        height: 30px;
+        width: 100%;
+        background-color: darkgreen;
+        position: absolute;
+        top: 10px;
+        font-size: 17px;
+        color: white;
+        padding-left: 50px;
+        line-height: 30px;
+    }
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    </style>
+
+
+</head>
+
+
+<body>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
+    <nav>
+        <div class="nav-wrapper  indigo lighten-2">
+            <a href="#" class="brand-logo center">PokeyPy Manager</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li><a href="/">Dashboard</a></li>
+                
+                <li><a href="/inventory">PokeManager</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main" id="main">
+
+        <div class="profile" id="profile">dd</div>
+        <div class="stats" id="stats">dd</div>
+
+    </div>
+
+    <script type="text/javascript">
+        function loadJSON(path, success, error) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        if (success)
+                            success(JSON.parse(xhr.responseText));
+                    } else {
+                        if (error)
+                            error(xhr);
+                    }
+                }
+            };
+            xhr.open("GET", path, true);
+            xhr.send();
+        }
+
+        function sculpt(data) {
+            if (data.team == 'noteam') {
+                document.getElementById('main').style = 'background-image: url("static/avatars/' + 'noteam.png");';
+            } else if (data.team == '1') {
+                document.getElementById('main').style = 'background-image: url("static/avatars/' + 'blue.png");';
+            } else if (data.team == '2') {
+                document.getElementById('main').style = 'background-image: url("static/avatars/' + 'red.png");';
+            } else if (data.team == '3') {
+                document.getElementById('main').style = 'background-image: url("static/avatars/' + 'yellow.png");';
+            }
+
+            document.getElementById('profile').innerHTML = '<font size=6 face=arial><b>' + data.username + '</font></b><br> \
+			<font face=arial size=4><b>Level ' + data.level + '</b></font>'
+
+            document.getElementById('stats').innerHTML = '\
+			<b><font size=6 face=arial>Stats</font></b><b><br><font face=arial>KM Walked:</b> ' + Math.round(parseInt(data.km_walked)) + '</font> \
+			<br><b><font face=arial>Pokemon Encountered:</b> ' + data.pokemons_encountered + '</font> \
+			<br><b><font face=arial>Pokemon Captured:</b>  ' + data.pokemons_captured + '</font> \
+			<br><b><font face=arial>Capture Rate:</b>  ' + (Math.round((parseInt(data.pokemons_captured) / parseInt(data.pokemons_encountered)) * 100)) + '%</font>';
+
+        }
+
+
+
+
+        var url = "/static/stats.json?" + new Date().getTime();
+        loadJSON(url,
+            function(data) {
+                sculpt(data);
+            },
+            function(xhr) {
+                console.error(xhr);
+            }
+        );
+    </script>
+
+</body>
+
+</html>

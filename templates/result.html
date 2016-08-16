@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="-1">
+</head>
+
+
+<body>
+
+    
+
+<script type="text/javascript">
+<!--
+redirectURL = "/";
+function timedRedirect(redirectTime) {
+	setTimeout("location.href = redirectURL;",redirectTime);
+}
+//   -->
+function loadJSON(path, success, error)
+{
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                if (success)
+                    success(JSON.parse(xhr.responseText));
+            } else {
+                if (error)
+                    error(xhr);
+            }
+        }
+    };
+    xhr.open("GET", path, true);
+    xhr.send();
+}
+
+function sculpt(data)
+{
+var status = data[0].status
+var message = data[0].message
+
+if (status == 'fail')
+	{
+		document.getElementById('status').innerHTML = ('<center><font size=5 color=red><b>' + message + '</b>  <i>Redirecting in 4 seconds</i></center></font>'); 
+		timedRedirect(3500);
+	
+	}
+	else {
+	var id = data[0].pokemon_id
+	
+	document.getElementById('status').innerHTML = ('<center><img src=static/avatars/' + id + '.png width=400 height=400><br><font size=5 color=green><b>Status: ' + status + '</b>  <i>Redirecting in 5 seconds</i></center></font>'); 
+	timedRedirect(5000);
+	}
+
+
+
+}
+var url = "/static/catch_data.json?" + new Date().getTime();
+loadJSON(url,
+         function(data) {sculpt(data); },
+         function(xhr) { console.error(xhr); }
+);
+
+</script>
+<div id="status"></div>
+</body>
+
+</html>

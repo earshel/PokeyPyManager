@@ -1,0 +1,12 @@
+[AUTH]
+type = ptc ; ptc or google
+username = username
+password = password
+
+[CONFIG]
+startLoc = Central Park NY ; can be a place name or coordinates
+encryptFile = encrypt32bit.dll ; location of the encryption file (see pogo/encrypt/ for a list of files)
+inventoryAgeThreshold = 300 ; time in seconds that cached inventory will stay valid for - fresh inventory data always generated after performing an action(rename/evolve etc)
+evolveDelay = 10 ; 10 second base delay + random delay between 1-5 sec. 
+releaseDelay = 3 ; 3 second base delay + random delay between 1-5 sec. 
+renameDelay = 3 ; 3 second base delay + random delay between 1-5 sec. 
